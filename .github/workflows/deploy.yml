@@ -1,0 +1,29 @@
+name: Deploy to Local Machine
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner for GitHub Actions
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # Clone the code from the repository
+
+    - name: Set up SSH key
+      uses: webfactory/ssh-agent@v0.5.3  # Set up the SSH private key for connection
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}  # Use the SSH private key stored in GitHub Secrets
+    
+    - name: Deploy to local machine
+      run: |
+        ssh -o StrictHostKeyChecking=no user@your-local-ip << 'EOF'
+          cd /path/to/your/project  # Navigate to the project directory on your local machine
+          git pull origin main      # Pull the latest changes from the main branch
+          npm install               # Install dependencies
+          npm run build             # Build the project (adjust this if you have other build commands)
+          npm run start             # Start the application (adjust as needed)
+        EOF
