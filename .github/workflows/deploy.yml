@@ -20,8 +20,8 @@ jobs:
     
     - name: Deploy to local machine
       run: |
-        ssh -o StrictHostKeyChecking=no user@your-local-ip << 'EOF'
-          cd /path/to/your/project  # Navigate to the project directory on your local machine
+        ssh -o StrictHostKeyChecking=no user@192.168.1.100 << 'EOF'
+          cd C:\Users\dganesh\OneDrive - Computer Enterprises Inc\Desktop\Sample  # Navigate to the project directory on your local machine
           git pull origin main      # Pull the latest changes from the main branch
           npm install               # Install dependencies
           npm run build             # Build the project (adjust this if you have other build commands)
