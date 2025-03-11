@@ -1,29 +1,23 @@
-name: Deploy to Local Machine
+name: Deploy to Netlify
 
 on:
   push:
     branches:
-      - main  # Trigger on push to the main branch
+      - main  # Or any other branch you want to deploy from
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu runner for GitHub Actions
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2  # Clone the code from the repository
+    runs-on: ubuntu-latest
 
-    - name: Set up SSH key
-      uses: webfactory/ssh-agent@v0.5.3  # Set up the SSH private key for connection
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}  # Use the SSH private key stored in GitHub Secrets
-    
-    - name: Deploy to local machine
-      run: |
-        ssh -o StrictHostKeyChecking=no user@192.168.1.100 << 'EOF'
-          cd C:\Users\dganesh\OneDrive - Computer Enterprises Inc\Desktop\Sample  # Navigate to the project directory on your local machine
-          git pull origin main      # Pull the latest changes from the main branch
-          npm install               # Install dependencies
-          npm run build             # Build the project (adjust this if you have other build commands)
-          npm run start             # Start the application (adjust as needed)
-        EOF
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v1.4.0
+        with:
+          publish-dir: ./public  # Adjust this to the folder that holds your static site (e.g., dist, build)
+          production-branch: main
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
