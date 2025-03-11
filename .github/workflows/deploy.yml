@@ -16,7 +16,7 @@ jobs:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1
         with:
-          publish-dir: ./  # Root directory (because index.html is in the root)
+          publish-dir: ./  # The root directory (index.html should be in the root)
           production-branch: main
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
