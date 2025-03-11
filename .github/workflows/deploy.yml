@@ -14,9 +14,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v1.4.0
+        uses: nwtgck/actions-netlify@v1  # Use the stable 'v1' version
         with:
-          publish-dir: ./public  # Adjust this to the folder that holds your static site (e.g., dist, build)
+          publish-dir: ./public  # Adjust this to your build output directory (e.g., 'build', 'dist', etc.)
           production-branch: main
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
