@@ -2,7 +2,7 @@
 exports.handler = async (event, context) => {
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'Hello from my serverless function!' }),
+      body: JSON.stringify({ message: 'Hello world!' }),
     };
   };
   
