@@ -2,7 +2,7 @@
 exports.handler = async (event, context) => {
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'welcome to CEI India!' 
+      body: JSON.stringify({ message: 'Hello!' 
       }),
     };
   };
